@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51294b279d36faa4c90fa9f90f960bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 0}
+  buildingPrefabs: []
 --- !u!4 &142197848
 Transform:
   m_ObjectHideFlags: 0
@@ -250,6 +250,8 @@ MonoBehaviour:
   - {fileID: 100000, guid: 1d53359c70324d14c989d7058b50ec6b, type: 3}
   - {fileID: 100000, guid: 2dbee28eacba7dd42845e0153c4da642, type: 3}
   - {fileID: 100000, guid: 52f969fb493f02248ba2e0ab07d6d81f, type: 3}
+  buildingDefinitions: []
+  buildingsData: []
 --- !u!4 &230997433
 Transform:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class GridManager : MonoBehaviour
     public GameObject cellPrefab;
 
     private bool[,] occupied;
-    private Vector3[,] grid; // la vraie grille de positions
+    private Vector3[,] grid;
 
     void Awake()
     {
@@ -36,24 +36,26 @@ public class GridManager : MonoBehaviour
 
     public Vector2Int GetCellFromWorldPosition(Vector3 worldPos)
     {
-        int x = Mathf.FloorToInt(worldPos.x / cellSize);
-        int y = Mathf.FloorToInt(worldPos.z / cellSize);
+        int x = Mathf.FloorToInt((worldPos.x + (width * cellSize / 2f)) / cellSize);
+        int y = Mathf.FloorToInt((worldPos.z + (height * cellSize / 2f)) / cellSize);
         return new Vector2Int(x, y);
     }
 
     public bool IsCellFree(Vector3 worldPos, out Vector2Int cell)
     {
-        int x = Mathf.FloorToInt(worldPos.x / cellSize);
-        int y = Mathf.FloorToInt(worldPos.z / cellSize);
-        cell = new Vector2Int(x, y);
+        cell = GetCellFromWorldPosition(worldPos);
 
-        if (x < 0 || x >= width || y < 0 || y >= height) return false;
+        if (cell.x < 0 || cell.x >= width || cell.y < 0 || cell.y >= height)
+            return false;
 
-        return !occupied[x, y];
+        return !occupied[cell.x, cell.y];
     }
 
     public void OccupyCell(Vector2Int cell)
     {
+        if (cell.x < 0 || cell.x >= width || cell.y < 0 || cell.y >= height)
+            return;
+
         occupied[cell.x, cell.y] = true;
     }
 
