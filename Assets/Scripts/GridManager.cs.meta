@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: e740f322780c7f640911e8d6112a708a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - cellPrefab: {fileID: 8641763907231644710, guid: 0dba158951a8a4879893fc1d8a6eb165, type: 3}
+  - grassLightMaterial: {fileID: 2100000, guid: a3e7d46fd040641a894f580ab210a52b, type: 2}
+  - grassDarkMaterial: {fileID: 2100000, guid: 22f8f66831352478ab2a770739517580, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

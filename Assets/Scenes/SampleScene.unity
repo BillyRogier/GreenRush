@@ -148,7 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51294b279d36faa4c90fa9f90f960bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefabs: []
+  buildingOptions:
+  - {fileID: 11400000, guid: 4d8093531b47d22418db3218422b0ebd, type: 2}
+  - {fileID: 11400000, guid: 1a63fc335da0b22408cb86cd2b8f0774, type: 2}
 --- !u!4 &142197848
 Transform:
   m_ObjectHideFlags: 0
@@ -196,7 +198,9 @@ MonoBehaviour:
   width: 10
   height: 10
   cellSize: 1
-  cellPrefab: {fileID: 174863083949305085, guid: e1fdd81679e5782419b675371d71df95, type: 3}
+  cellPrefab: {fileID: 8641763907231644710, guid: 0dba158951a8a4879893fc1d8a6eb165, type: 3}
+  grassLightMaterial: {fileID: 2100000, guid: 22f8f66831352478ab2a770739517580, type: 2}
+  grassDarkMaterial: {fileID: 2100000, guid: a3e7d46fd040641a894f580ab210a52b, type: 2}
 --- !u!4 &165624331
 Transform:
   m_ObjectHideFlags: 0

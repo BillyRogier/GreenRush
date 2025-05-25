@@ -5,7 +5,10 @@ public class GridManager : MonoBehaviour
     public int width = 10;
     public int height = 10;
     public float cellSize = 1f;
-    public GameObject cellPrefab;
+
+    public GameObject cellPrefab; // Ton prefab "GridCell"
+    public Material grassLightMaterial;
+    public Material grassDarkMaterial;
 
     private bool[,] occupied;
     private Vector3[,] grid;
@@ -25,11 +28,20 @@ public class GridManager : MonoBehaviour
             {
                 Vector3 pos = new Vector3(
                     x * cellSize - (width * cellSize / 2f) + cellSize / 2f,
-                    0,
+                    0.01f, // Hauteur du sol, ajustable si nécessaire
                     y * cellSize - (height * cellSize / 2f) + cellSize / 2f
                 );
+
                 grid[x, y] = pos;
-                Instantiate(cellPrefab, pos, Quaternion.identity);
+
+                GameObject cell = Instantiate(cellPrefab, pos, Quaternion.identity, transform);
+
+                // Choix du matériau en damier
+                Material matToUse = (x + y) % 2 == 0 ? grassLightMaterial : grassDarkMaterial;
+                cell.GetComponent<Renderer>().material = matToUse;
+
+                // Ajuste la taille au besoin (si le Plane est grand)
+                cell.transform.localScale = new Vector3(cellSize / 10f, 1, cellSize / 10f);
             }
         }
     }
