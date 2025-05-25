@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83503424a102be24f826136f4404ff87, type: 3}
   m_Name: PanneauSolaire
   m_EditorClassIdentifier: 
-  type: 0
-  prefab: {fileID: 0}
+  type: 1
+  prefab: {fileID: 100000, guid: 0fcc0b85550a21d4f8dea0cf26372739, type: 3}
   cost: 0
-  productionPerDay: 0
+  productionPerMinute: 0
+  incomePerMinute: 0
