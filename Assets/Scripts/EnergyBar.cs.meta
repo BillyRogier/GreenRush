@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 430a07c5cac7d408499a626980176dde
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - greenBar: {fileID: 6794533822068618057, guid: b862ad888c1ef437aa82c8f0bb0e5972, type: 3}
+  - fossilBar: {fileID: 5411708020659545408, guid: 0dabba2c291e94a37b5d32d0c7bbeffb, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
