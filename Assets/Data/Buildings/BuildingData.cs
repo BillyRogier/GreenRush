@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// c'est super !!!
 [CreateAssetMenu(fileName = "NewBuilding", menuName = "CityBuilder/Building")]
 public class BuildingData : ScriptableObject
 {
