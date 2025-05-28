@@ -2,23 +2,34 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public int width = 10;
-    public int height = 10;
+    public GameObject plane; // Assigne ta plane dans l'inspecteur
     public float cellSize = 1f;
 
-    public GameObject cellPrefab; // Ton prefab "GridCell"
+    public GameObject cellPrefab;
     public Material grassLightMaterial;
     public Material grassDarkMaterial;
 
     private bool[,] occupied;
     private Vector3[,] grid;
 
+    private int width;
+    private int height;
+
     void Awake()
     {
+        // Récupère la taille du sol (la plane)
+        Renderer planeRenderer = plane.GetComponent<Renderer>();
+        Vector3 size = planeRenderer.bounds.size;
+
+        width = Mathf.RoundToInt(size.x / cellSize);
+        height = Mathf.RoundToInt(size.z / cellSize);
+
         grid = new Vector3[width, height];
         occupied = new bool[width, height];
+
         CreateGrid();
     }
+
 
     public void CreateGrid()
     {
