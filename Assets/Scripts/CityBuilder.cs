@@ -71,13 +71,4 @@ public class CityBuilder : MonoBehaviour
         GameObject building = Instantiate(buildingPrefabs[prefabIndex], worldPos, Quaternion.identity);
         gridManager.OccupyCell(new Vector2Int(x, y));
     }
-
-    public void PlaceBuilding(BuildingType type, int x, int y)
-    {
-        if (!prefabMap.ContainsKey(type)) return;
-
-        Vector3 worldPos = gridManager.GetCellWorldPosition(x, y);
-        GameObject building = Instantiate(prefabMap[type], worldPos, Quaternion.identity);
-        gridManager.OccupyCell(new Vector2Int(x, y));
-    }
 }
