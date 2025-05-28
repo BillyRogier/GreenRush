@@ -19,7 +19,7 @@ public class ShopItem : MonoBehaviour
 
     public void OnBuyClicked()
     {
-        Debug.Log($"Tu achètes : {data.type} pour {data.cost}");
-        // ta logique d'achat ici…
+        FindObjectOfType<BuildingPlacer>().StartPlacingBuilding(data);
+        FindObjectOfType<MenuController>().ShowMainMenu();
     }
 }
