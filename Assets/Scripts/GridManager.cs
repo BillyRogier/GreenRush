@@ -13,9 +13,6 @@ public class GridManager : MonoBehaviour
     private bool[,] occupied;
     private Vector3[,] grid;
 
-    public int width;
-    public int height;
-
     void Awake()
     {
         grid = new Vector3[width, height];
