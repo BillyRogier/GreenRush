@@ -32,7 +32,10 @@ public class BuildingPlacer : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    Instantiate(pendingPlacement.prefab, cellPos, Quaternion.identity);
+                    var go = Instantiate(pendingPlacement.prefab, cellPos, Quaternion.identity);
+                    var building = go.GetComponent<Building>();
+                    if (building != null) building.Initialize(pendingPlacement);
+
                     gridManager.OccupyCell(cell);
                     Destroy(ghostInstance);
                     ghostInstance = null;
