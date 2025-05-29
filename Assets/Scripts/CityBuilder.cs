@@ -18,11 +18,24 @@ public class CityBuilder : MonoBehaviour
     public BuildingData[] buildingsData;
     private Dictionary<BuildingType, BuildingData> dataMap;
 
+    // Taille dynamique de la ville
+    private int citySizeX = 8;
+    private int citySizeY = 8;
+
     void Start()
     {
         InitPrefabMap();
         InitDataMap();
         PlaceInitialBuildings();
+    }
+
+    void Update()
+    {
+        // Shift + 3 (KeyCode.Alpha3 avec Shift)
+        if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ExpandCity();
+        }
     }
 
     void InitPrefabMap()
@@ -43,24 +56,53 @@ public class CityBuilder : MonoBehaviour
         }
     }
 
+    void ExpandCity()
+    {
+        // On augmente la taille, sans dépasser la taille de la grille
+        citySizeX = Mathf.Min(citySizeX + 1, gridManager.width);
+        citySizeY = Mathf.Min(citySizeY + 1, gridManager.height);
+
+        // Optionnel : détruire les anciens bâtiments avant de replacer
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        PlaceInitialBuildings();
+    }
+
     void PlaceInitialBuildings()
     {
-        PlaceBuilding(0, 4, 4);
-        PlaceBuilding(1, 5, 4);
-        PlaceBuilding(2, 4, 5);
-        PlaceBuilding(3, 5, 5);
+        int sizeX = Mathf.Min(citySizeX, gridManager.width);
+        int sizeY = Mathf.Min(citySizeY, gridManager.height);
 
-        PlaceBuilding(4, 4, 6);
-        PlaceBuilding(5, 5, 6);
+        // Calcul du décalage pour centrer la ville
+        int offsetX = (gridManager.width - sizeX) / 2;
+        int offsetY = (gridManager.height - sizeY) / 2;
 
-        PlaceBuilding(1, 4, 3);
-        PlaceBuilding(2, 5, 3);
+        int roadPrefabIndex = 0; // Le prefab d'index 0 doit être une rue
+        int buildingStartIndex = 1; // Les autres sont des bâtiments
 
-        PlaceBuilding(0, 3, 4);
-        PlaceBuilding(1, 3, 5);
+        for (int x = 0; x < sizeX; x++)
+        {
+            for (int y = 0; y < sizeY; y++)
+            {
+                int gridX = x + offsetX;
+                int gridY = y + offsetY;
 
-        PlaceBuilding(0, 6, 4);
-        PlaceBuilding(2, 6, 5);
+                // Rues horizontales et verticales tous les 3 blocs
+                if (x % 3 == 0 || y % 3 == 0)
+                {
+                    PlaceBuilding(roadPrefabIndex, gridX, gridY);
+                }
+                else
+                {
+                    // Place un bâtiment aléatoire (hors prefab 0)
+                    int prefabIndex = Random.Range(buildingStartIndex, buildingPrefabs.Length);
+                    PlaceBuilding(prefabIndex, gridX, gridY);
+                }
+            }
+        }
     }
 
     void PlaceBuilding(int prefabIndex, int x, int y)
@@ -68,7 +110,12 @@ public class CityBuilder : MonoBehaviour
         if (prefabIndex < 0 || prefabIndex >= buildingPrefabs.Length) return;
 
         Vector3 worldPos = gridManager.GetCellWorldPosition(x, y);
-        GameObject building = Instantiate(buildingPrefabs[prefabIndex], worldPos, Quaternion.identity);
+
+        // Si c'est une route (index 0), on place à y = 0.02
+        if (prefabIndex == 0)
+            worldPos.y = 0.02f;
+
+        GameObject building = Instantiate(buildingPrefabs[prefabIndex], worldPos, Quaternion.identity, transform);
         gridManager.OccupyCell(new Vector2Int(x, y));
     }
 }
