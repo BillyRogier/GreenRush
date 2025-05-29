@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   prefab: {fileID: 100000, guid: 0fcc0b85550a21d4f8dea0cf26372739, type: 3}
-  cost: 0
-  productionPerMinute: 0
-  incomePerMinute: 0
+  cost: 100
+  productionPerMinute: 0.08
+  incomePerMinute: 0.16
